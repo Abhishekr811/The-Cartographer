@@ -1,0 +1,78 @@
+@import url('https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,300..700&family=Work+Sans:wght@400;500;600&display=swap');
+
+:root {
+  --color-paper: #fdf8f8;
+  --color-ink: #1c1b1b;
+  --color-ink-soft: #444748;
+  --color-ink-muted: #5f5e5e;
+  --color-outline: #747878;
+  --color-outline-variant: #c4c7c7;
+  --color-panel: #f7f3f2;
+  --color-panel-low: #f1edec;
+
+  --state-established: #3f7d4f;
+  --state-debated: #bf8a1d;
+  --state-unknown: #476f9f;
+
+  --font-serif: 'Newsreader', Georgia, serif;
+  --font-sans: 'Work Sans', 'Segoe UI', sans-serif;
+
+  --text-display: 3rem;
+  --text-h1: 2rem;
+  --text-h2: 1.5rem;
+  --text-h3: 1.25rem;
+  --text-body-lg: 1.125rem;
+  --text-body: 1rem;
+  --text-label: 0.75rem;
+  --text-meta: 0.8125rem;
+
+  --lh-heading: 1.2;
+  --lh-body: 1.6;
+  --lh-meta: 1.4;
+
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4rem;
+  --space-9: 5rem;
+  --space-10: 6rem;
+
+  --motion-fast: 180ms ease;
+  --shadow-soft: 0 14px 34px -24px rgba(0, 0, 0, 0.55);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  color: var(--color-ink);
+  background: radial-gradient(circle at 8% 10%, rgba(191, 138, 29, 0.08), transparent 35%),
+    radial-gradient(circle at 92% 0%, rgba(71, 111, 159, 0.07), transparent 30%),
+    var(--color-paper);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5 {
+  margin: 0;
+}

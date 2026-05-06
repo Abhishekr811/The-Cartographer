@@ -1,0 +1,41 @@
+.claimList {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.claimItem {
+  width: 100%;
+  text-align: left;
+  border: 0.5px solid var(--color-outline-variant);
+  background: var(--color-paper);
+  padding: var(--space-4);
+  cursor: pointer;
+}
+
+.claimHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: var(--space-3);
+  margin-bottom: var(--space-2);
+}
+
+.claimMeta {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-3);
+  margin-top: var(--space-3);
+  padding-top: var(--space-3);
+  border-top: 0.5px solid var(--color-outline-variant);
+}
+
+.confidenceTag {
+  padding: 0.15rem 0.4rem;
+  border: 0.5px solid var(--color-outline);
+  font-size: var(--text-meta);
+}
+
+.claimItem:focus-visible {
+  outline: 1px solid var(--color-ink);
+  outline-offset: 2px;
+}

@@ -1,0 +1,62 @@
+.skeleton {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+  width: 100%;
+}
+
+.line {
+  background: var(--color-panel-low);
+  border-radius: 4px;
+  animation: pulse 1.4s ease-in-out infinite;
+}
+
+.card {
+  padding: 1.5em;
+  background: var(--color-panel-low);
+  border-radius: 8px;
+  animation: pulse 1.4s ease-in-out infinite;
+}
+
+.cardHeader {
+  height: 1.5em;
+  width: 60%;
+  margin-bottom: 1em;
+  background: var(--color-panel);
+  border-radius: 4px;
+}
+
+.cardBody {
+  height: 4em;
+  background: var(--color-panel);
+  border-radius: 4px;
+}
+
+.claim {
+  padding: 1em;
+  background: var(--color-panel-low);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+  animation: pulse 1.4s ease-in-out infinite;
+}
+
+.claimTitle {
+  height: 1.2em;
+  width: 75%;
+  background: var(--color-panel);
+  border-radius: 4px;
+}
+
+.claimMeta {
+  height: 0.8em;
+  width: 40%;
+  background: var(--color-panel);
+  border-radius: 4px;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}

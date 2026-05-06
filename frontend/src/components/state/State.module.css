@@ -1,0 +1,69 @@
+.stateIndicator {
+  display: inline-block;
+}
+
+.dot {
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 50%;
+}
+
+.bar {
+  width: 4px;
+  min-height: 3.5rem;
+}
+
+.established {
+  background: var(--state-established);
+}
+
+.debated {
+  background: var(--state-debated);
+}
+
+.unknown {
+  background: var(--state-unknown);
+}
+
+.stateCard {
+  display: grid;
+  gap: var(--space-4);
+  grid-template-columns: 4px 1fr;
+  padding: var(--space-5);
+  border: 0.5px solid var(--color-outline-variant);
+  background: var(--color-panel);
+  min-height: 220px;
+  transition: transform var(--motion-fast), box-shadow var(--motion-fast), border-color var(--motion-fast);
+  cursor: pointer;
+}
+
+.stateCard:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-soft);
+  border-color: var(--color-outline);
+}
+
+.stateCard[data-state="established"] {
+  border-left: 3px solid var(--state-established);
+}
+
+.stateCard[data-state="debated"] {
+  border-left: 3px solid var(--state-debated);
+}
+
+.stateCard[data-state="unknown"] {
+  border-left: 3px solid var(--state-unknown);
+}
+
+.stateCardBody {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.stateCardMeta {
+  margin-top: auto;
+  padding-top: var(--space-3);
+  border-top: 0.5px solid var(--color-outline-variant);
+  color: var(--color-ink-muted);
+  font-size: var(--text-meta);
+}

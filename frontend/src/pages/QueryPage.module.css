@@ -1,0 +1,72 @@
+.focusMuted {
+  opacity: 0.38;
+  filter: saturate(0.82);
+  transition: opacity var(--motion-fast), filter var(--motion-fast);
+}
+
+.sectionTight {
+  margin-top: calc(var(--space-7) * -1);
+}
+
+.actionsRow {
+  margin-top: var(--space-5);
+}
+
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+  background: rgba(28, 27, 27, 0.24);
+  border: 0;
+}
+
+.layout {
+  display: flex;
+  height: calc(100vh - 56px); /* Navbar is 56px */
+  width: 100%;
+}
+
+.mainContent {
+  flex: 1;
+  overflow-y: overlay; /* Use overlay if supported, or auto */
+  overflow-x: hidden;
+  position: relative;
+  height: 100%;
+}
+
+/* Custom scrollbar for premium feel */
+.mainContent::-webkit-scrollbar {
+  width: 8px;
+}
+.mainContent::-webkit-scrollbar-track {
+  background: transparent;
+}
+.mainContent::-webkit-scrollbar-thumb {
+  background: var(--color-outline-variant);
+  border-radius: 4px;
+}
+.mainContent::-webkit-scrollbar-thumb:hover {
+  background: var(--color-outline);
+}
+
+.sidePanelWrapper {
+  flex-shrink: 0;
+  border-left: 1px solid var(--color-outline-variant);
+  background: var(--color-paper);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.resizer {
+  width: 6px;
+  cursor: ew-resize;
+  background: transparent;
+  z-index: 10;
+  transition: background 0.2s;
+  margin-left: -3px; /* Center it on the border */
+}
+
+.resizer:hover, .resizerActive {
+  background: var(--color-ink);
+}

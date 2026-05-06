@@ -1,0 +1,167 @@
+.focusShell {
+  width: min(1400px, 100% - var(--space-8));
+  margin: var(--space-5) auto;
+  border: 0.5px solid var(--color-outline-variant);
+  background: var(--color-paper);
+  box-shadow: var(--shadow-soft);
+}
+
+.header {
+  display: flex;
+  justify-content: flex-end;
+  padding: var(--space-3) var(--space-4);
+  border-bottom: 0.5px solid var(--color-outline-variant);
+  background: var(--color-panel);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 3fr 5fr 4fr;
+  gap: var(--space-6);
+  padding: var(--space-6);
+}
+
+.contextCol {
+  display: grid;
+  gap: var(--space-4);
+  align-content: start;
+  padding-right: var(--space-4);
+  border-right: 0.5px solid var(--color-outline-variant);
+}
+
+.contextCol h1 {
+  font-family: var(--font-serif);
+  font-size: var(--text-h1);
+  line-height: var(--lh-heading);
+  color: var(--color-ink);
+  font-weight: 500;
+}
+
+.claimMeta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  font-size: var(--text-meta);
+  color: var(--color-ink-muted);
+}
+
+.claimId,
+.claimCitations,
+.claimConfidence {
+  padding: var(--space-1) var(--space-2);
+  background: var(--color-panel-low);
+  border: 0.5px solid var(--color-outline-variant);
+}
+
+.claimConfidence.low {
+  border-color: var(--state-debated);
+  color: var(--state-debated);
+}
+
+.graphCol {
+  padding-inline: var(--space-5);
+  display: grid;
+  align-content: center;
+}
+
+.graphCanvas {
+  border: 0.5px dashed var(--color-outline);
+  min-height: 420px;
+  background: repeating-linear-gradient(
+    45deg,
+    rgba(0, 0, 0, 0.02),
+    rgba(0, 0, 0, 0.02) 8px,
+    transparent 8px,
+    transparent 16px
+  );
+  display: grid;
+  place-items: center;
+  text-align: center;
+  padding: var(--space-4);
+}
+
+.evidenceCol {
+  display: grid;
+  gap: var(--space-5);
+  align-content: start;
+  padding-left: var(--space-4);
+  border-left: 0.5px solid var(--color-outline-variant);
+}
+
+.evidenceSection {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.evidenceItem {
+  padding: var(--space-3);
+  background: var(--color-panel-low);
+  border: 0.5px solid var(--color-outline-variant);
+  transition: transform var(--motion-fast), box-shadow var(--motion-fast);
+}
+
+.evidenceItem:hover {
+  transform: translateX(4px);
+  box-shadow: var(--shadow-soft);
+}
+
+.confidenceTag {
+  font-size: var(--text-label);
+  padding: 0.15rem 0.5rem;
+  border-radius: 2px;
+  margin-left: var(--space-2);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.confidenceTag.high {
+  background: rgba(63, 125, 79, 0.1);
+  border-color: var(--state-established);
+  color: var(--state-established);
+}
+
+.confidenceTag.moderate {
+  background: rgba(191, 138, 29, 0.1);
+  border-color: var(--state-debated);
+  color: var(--state-debated);
+}
+
+.confidenceTag.low {
+  background: rgba(71, 111, 159, 0.1);
+  border-color: var(--state-unknown);
+  color: var(--state-unknown);
+}
+
+@media (max-width: 1140px) {
+  .focusShell {
+    width: min(1400px, 100% - var(--space-4));
+    margin: var(--space-3) auto;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-5);
+    padding: var(--space-4);
+  }
+
+  .contextCol {
+    padding-right: 0;
+    border-right: none;
+    border-bottom: 0.5px solid var(--color-outline-variant);
+    padding-bottom: var(--space-4);
+  }
+
+  .graphCol {
+    border-inline: 0;
+    border-block: 0.5px solid var(--color-outline-variant);
+    padding-inline: 0;
+    padding-block: var(--space-4);
+  }
+
+  .evidenceCol {
+    padding-left: 0;
+    border-left: none;
+    padding-top: var(--space-4);
+    border-top: 0.5px solid var(--color-outline-variant);
+  }
+}

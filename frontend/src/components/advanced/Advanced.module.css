@@ -1,0 +1,197 @@
+.summaryStrip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  padding: var(--space-4);
+  border: 0.5px solid var(--color-outline-variant);
+  background: var(--color-panel-low);
+}
+
+.summaryMetric {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.debateBlock {
+  border: 0.5px solid var(--color-outline-variant);
+  background: var(--color-panel);
+}
+
+.debateGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.debateColumn {
+  padding: var(--space-5);
+}
+
+.debateColumn + .debateColumn {
+  border-left: 0.5px solid var(--color-outline-variant);
+}
+
+.debateList {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.debateItem {
+  padding-left: var(--space-3);
+  border-left: 2px solid var(--color-outline-variant);
+}
+
+.relationGraph,
+.relationGraphEmpty {
+  display: grid;
+  gap: var(--space-4);
+  width: 100%;
+}
+
+.relationGraphHeader {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
+.relationList {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.relationEdge {
+  padding: var(--space-3);
+  border: 0.5px solid var(--color-outline-variant);
+  background: var(--color-panel-low);
+}
+
+.relationEdgeFocus {
+  border-color: var(--state-established);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--state-established) 20%, transparent);
+}
+
+.relationEndpoints {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+}
+
+@media (max-width: 900px) {
+  .debateGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .debateColumn + .debateColumn {
+    border-left: 0;
+    border-top: 0.5px solid var(--color-outline-variant);
+  }
+}
+
+.skeletonDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-panel-low);
+  animation: skeletonPulse 1.4s ease-in-out infinite;
+}
+
+.skeletonLabel {
+  height: 1em;
+  width: 80%;
+  background: var(--color-panel-low);
+  border-radius: 4px;
+  animation: skeletonPulse 1.4s ease-in-out infinite;
+}
+
+@keyframes skeletonPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+.visualGraphContainer {
+  position: relative;
+  width: 100%;
+  padding: var(--space-4);
+  background: var(--color-panel-low);
+  border: 1px solid var(--color-outline-variant);
+  border-radius: 8px;
+}
+
+.canvas {
+  position: relative;
+  min-height: 400px;
+}
+
+.connections {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.connectionLine {
+  fill: none;
+  stroke: var(--color-outline-variant);
+  stroke-width: 1.5;
+  transition: all 0.2s;
+}
+
+.connectionLineActive {
+  stroke: var(--color-ink);
+  stroke-width: 2.5;
+}
+
+.graphGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--space-5);
+  position: relative;
+  z-index: 2;
+  padding: var(--space-4);
+}
+
+.node {
+  background: var(--color-paper);
+  border: 1px solid var(--color-outline-variant);
+  border-radius: 4px;
+  padding: var(--space-3);
+  transition: all 0.2s ease-in-out;
+}
+
+.nodeHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-2);
+}
+
+.nodeDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.nodeCore {
+  border-top-width: 3px;
+  border-top-color: var(--color-ink);
+}
+
+.nodeSupport {
+  border-top-width: 3px;
+  border-top-color: var(--state-established);
+}
+
+.nodeOpposition {
+  border-top-width: 3px;
+  border-top-color: var(--state-debated);
+}
+
+.nodeUnknown {
+  border-top-width: 3px;
+  border-top-color: var(--state-unknown);
+}

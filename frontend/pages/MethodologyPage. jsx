@@ -1,0 +1,5 @@
+import PageContainer from "../components/layout/PageContainer";
+import Section from "../components/layout/Section";
+import Heading from "../components/typography/Heading";
+import Text from "../components/typography/Text";
+import styles from "./MethodologyPage. module.less";

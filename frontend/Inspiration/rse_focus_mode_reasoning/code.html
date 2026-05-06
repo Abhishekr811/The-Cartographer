@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Focus Mode - Research State Engine</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&amp;family=Work+Sans:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "secondary-container": "#e4e2e2",
+                        "tertiary-fixed": "#e6e1df",
+                        "secondary-fixed-dim": "#c8c6c6",
+                        "on-primary-container": "#858383",
+                        "on-primary": "#ffffff",
+                        "error": "#ba1a1a",
+                        "secondary-fixed": "#e4e2e2",
+                        "outline-variant": "#c4c7c7",
+                        "on-surface-variant": "#444748",
+                        "inverse-on-surface": "#f4f0ef",
+                        "background": "#fdf8f8",
+                        "tertiary": "#000000",
+                        "surface-dim": "#ddd9d8",
+                        "on-primary-fixed": "#1c1b1b",
+                        "inverse-primary": "#c8c6c5",
+                        "on-tertiary-fixed-variant": "#484645",
+                        "on-tertiary-container": "#868381",
+                        "on-surface": "#1c1b1b",
+                        "primary-container": "#1c1b1b",
+                        "on-secondary-fixed-variant": "#474747",
+                        "on-error": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-variant": "#e5e2e1",
+                        "surface-bright": "#fdf8f8",
+                        "on-secondary": "#ffffff",
+                        "surface-container-low": "#f7f3f2",
+                        "inverse-surface": "#313030",
+                        "tertiary-fixed-dim": "#cac6c3",
+                        "surface-container": "#f1edec",
+                        "tertiary-container": "#1c1b1a",
+                        "surface-container-highest": "#e5e2e1",
+                        "on-tertiary": "#ffffff",
+                        "outline": "#747878",
+                        "primary-fixed": "#e5e2e1",
+                        "secondary": "#5e5e5e",
+                        "on-primary-fixed-variant": "#474646",
+                        "on-error-container": "#93000a",
+                        "primary": "#000000",
+                        "on-background": "#1c1b1b",
+                        "surface-tint": "#5f5e5e",
+                        "surface": "#fdf8f8",
+                        "on-secondary-fixed": "#1b1c1c",
+                        "on-tertiary-fixed": "#1c1b1a",
+                        "primary-fixed-dim": "#c8c6c5",
+                        "surface-container-high": "#ebe7e6",
+                        "on-secondary-container": "#646464"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    spacing: {
+                        "margin-page": "64px",
+                        "gutter": "32px",
+                        "unit": "4px",
+                        "stack-md": "24px",
+                        "stack-lg": "48px",
+                        "stack-sm": "12px"
+                    },
+                    fontFamily: {
+                        "headline-lg": ["Newsreader", "serif"],
+                        "body-md": ["Work Sans", "sans-serif"],
+                        "label-caps": ["Work Sans", "sans-serif"],
+                        "body-lg": ["Work Sans", "sans-serif"],
+                        "headline-md": ["Newsreader", "serif"],
+                        "display-xl": ["Newsreader", "serif"],
+                        "meta-sm": ["Work Sans", "sans-serif"]
+                    },
+                    fontSize: {
+                        "headline-lg": ["32px", { "lineHeight": "1.2", "fontWeight": "500" }],
+                        "body-md": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "label-caps": ["12px", { "lineHeight": "1", "letterSpacing": "0.08em", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "1.3", "fontWeight": "500" }],
+                        "display-xl": ["48px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+                        "meta-sm": ["13px", { "lineHeight": "1.4", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .editorial-hairline { border-bottom: 0.5px solid #1c1b1b; }
+        .knowledge-state-support { border-left: 4px solid #16a34a; padding-left: 12px; }
+        .knowledge-state-conflict { border-left: 4px solid #dc2626; padding-left: 12px; }
+        .knowledge-state-neutral { border-left: 4px solid #747878; padding-left: 12px; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface antialiased min-h-screen relative overflow-hidden">
+<!-- Blurred Background Context -->
+<div class="absolute inset-0 z-0 opacity-40 bg-surface-container-low" data-alt="A softly blurred, out-of-focus background showing an abstract, high-tech research environment. The lighting is bright and cool, suggesting a modern laboratory or data center. Faint geometric shapes and soft shadows create a sense of depth without distracting from the foreground overlay. The overall tone is clinical and intellectual." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBOMOHdbupJgsw5_BURghSKVyWI9dyf_vgjVP8Nt2fyNtvmWLiAPDxMiOBH34asvYVnnnK3Ds8cv_hqoqUqnT0y3rswq1tqGIeB4MEnxsW70li3_v1e3Itq16gd2gLZNquRFvkN90jNw52BNZWUEzWnNRAbSsldoeLJVwP2cWuCG9QGx-_zC0wUFZoeCqHRz96DEhmZH4ri-DA5PqUjDtVPCl2Chs9rKbzpih1fLjshDndUq4mwXB1SQaW2q_nkXn-q24QXcgrUEmAp'); background-size: cover; background-position: center;"></div>
+<!-- Focus Mode Overlay -->
+<main class="absolute inset-4 z-10 bg-background border-[0.5px] border-outline-variant shadow-2xl flex flex-col overflow-hidden">
+<!-- Header / Close Action -->
+<header class="flex justify-end p-gutter">
+<button class="flex items-center gap-2 text-on-surface hover:text-primary transition-colors group cursor-pointer">
+<span class="font-label-caps text-label-caps tracking-widest text-on-surface-variant group-hover:text-primary">EXIT FOCUS</span>
+<span class="material-symbols-outlined text-2xl font-light">close</span>
+</button>
+</header>
+<!-- Main Layout Canvas -->
+<div class="flex-1 grid grid-cols-12 gap-gutter px-margin-page pb-margin-page overflow-y-auto">
+<!-- LEFT: Context Panel -->
+<section class="col-span-3 flex flex-col gap-stack-lg pr-gutter border-r-[0.5px] border-outline-variant">
+<div>
+<div class="flex items-center gap-2 mb-stack-sm">
+<span class="w-2 h-2 bg-error rounded-none block"></span>
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">DEBATED</span>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-primary mb-stack-md italic">
+                        Optimal dosage paradigms for healthy human adults...
+                    </h1>
+<div class="font-body-md text-body-md text-on-surface-variant space-y-4">
+<p>
+                            The core tension lies in the trade-off between acute cognitive enhancement and long-term receptor down-regulation. 
+                        </p>
+<p>
+                            Recent longitudinal studies contradict the established safety thresholds previously accepted in the literature, leading to a bifurcated research consensus.
+                        </p>
+</div>
+</div>
+<div class="mt-auto">
+<span class="font-label-caps text-label-caps text-on-surface-variant block mb-2">META DATA</span>
+<ul class="font-meta-sm text-meta-sm text-on-surface-variant space-y-2">
+<li>Node ID: #884-X</li>
+<li>Citations Analyzed: 1,420</li>
+<li>Confidence Interval: Low</li>
+</ul>
+</div>
+</section>
+<!-- CENTER: Relationship Graph (Abstracted Representation) -->
+<section class="col-span-5 relative flex items-center justify-center p-gutter">
+<!-- Conceptual Graph Container -->
+<div class="relative w-full h-[600px]">
+<!-- Central Node -->
+<div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-48 p-4 bg-surface border-[0.5px] border-primary z-20 text-center shadow-sm">
+<span class="font-label-caps text-label-caps block mb-1">CORE DEBATE</span>
+<span class="font-body-md text-body-md font-medium">Dosage Paradox</span>
+</div>
+<!-- Supporting Node 1 (Top Left) -->
+<div class="absolute top-1/4 left-0 w-40 p-3 bg-surface z-10 text-left knowledge-state-support">
+<span class="font-meta-sm text-meta-sm block">Enhancement observed at 400mg</span>
+</div>
+<!-- Edge (SVG line placeholder conceptualized with CSS) -->
+<svg class="absolute inset-0 w-full h-full z-0 pointer-events-none">
+<line stroke="#16a34a" stroke-dasharray="4" stroke-width="0.5" x1="20%" x2="50%" y1="30%" y2="50%"></line>
+</svg>
+<!-- Opposing Node 1 (Bottom Right) -->
+<div class="absolute bottom-1/4 right-0 w-40 p-3 bg-surface z-10 text-left knowledge-state-conflict">
+<span class="font-meta-sm text-meta-sm block">Receptor fatigue &gt; 200mg</span>
+</div>
+<svg class="absolute inset-0 w-full h-full z-0 pointer-events-none">
+<line stroke="#dc2626" stroke-dasharray="4" stroke-width="0.5" x1="80%" x2="50%" y1="70%" y2="50%"></line>
+</svg>
+<!-- Supporting Node 2 (Top Right) -->
+<div class="absolute top-1/3 right-10 w-40 p-3 bg-surface z-10 text-left knowledge-state-support">
+<span class="font-meta-sm text-meta-sm block">Baseline normalization rapid</span>
+</div>
+<svg class="absolute inset-0 w-full h-full z-0 pointer-events-none">
+<line stroke="#16a34a" stroke-dasharray="4" stroke-width="0.5" x1="75%" x2="50%" y1="35%" y2="50%"></line>
+</svg>
+<!-- Opposing Node 2 (Bottom Left) -->
+<div class="absolute bottom-1/3 left-10 w-40 p-3 bg-surface z-10 text-left knowledge-state-conflict">
+<span class="font-meta-sm text-meta-sm block">Long-term anhedonia risk</span>
+</div>
+<svg class="absolute inset-0 w-full h-full z-0 pointer-events-none">
+<line stroke="#dc2626" stroke-dasharray="4" stroke-width="0.5" x1="25%" x2="50%" y1="65%" y2="50%"></line>
+</svg>
+</div>
+</section>
+<!-- RIGHT: Evidence Panel -->
+<section class="col-span-4 pl-gutter border-l-[0.5px] border-outline-variant flex flex-col gap-stack-lg">
+<!-- Supporting Evidence -->
+<div>
+<h2 class="font-headline-md text-headline-md text-primary mb-stack-md flex items-center gap-2">
+<span class="material-symbols-outlined text-[#16a34a]">check_circle</span>
+                        Supporting Evidence
+                    </h2>
+<div class="space-y-stack-md">
+<!-- Paper 1 -->
+<article class="group cursor-pointer">
+<div class="editorial-hairline pb-4 transition-colors group-hover:border-primary">
+<h3 class="font-body-lg text-body-lg font-medium text-primary mb-1 group-hover:text-primary-container transition-colors">Acute Cognitive Amplification in Cohort A</h3>
+<div class="flex items-center justify-between font-meta-sm text-meta-sm text-on-surface-variant">
+<span>Journal of Neuroscience, 2023</span>
+<span class="px-2 py-0.5 bg-[#16a34a]/10 text-[#16a34a] border border-[#16a34a]/20">Confidence: High</span>
+</div>
+</div>
+</article>
+<!-- Paper 2 -->
+<article class="group cursor-pointer">
+<div class="editorial-hairline pb-4 transition-colors group-hover:border-primary">
+<h3 class="font-body-lg text-body-lg font-medium text-primary mb-1 group-hover:text-primary-container transition-colors">Metabolic Pathways of High-Dose Protocols</h3>
+<div class="flex items-center justify-between font-meta-sm text-meta-sm text-on-surface-variant">
+<span>Nature Metabolism, 2022</span>
+<span class="px-2 py-0.5 bg-[#16a34a]/10 text-[#16a34a] border border-[#16a34a]/20">Confidence: High</span>
+</div>
+</div>
+</article>
+<!-- Paper 3 -->
+<article class="group cursor-pointer">
+<div class="editorial-hairline pb-4 transition-colors group-hover:border-primary">
+<h3 class="font-body-lg text-body-lg font-medium text-primary mb-1 group-hover:text-primary-container transition-colors">Short-term Recovery Metrics in Adults</h3>
+<div class="flex items-center justify-between font-meta-sm text-meta-sm text-on-surface-variant">
+<span>Clinical Trials Rev, 2024</span>
+<span class="px-2 py-0.5 bg-outline/10 text-on-surface-variant border border-outline/20">Confidence: Moderate</span>
+</div>
+</div>
+</article>
+</div>
+</div>
+<!-- Opposing Evidence -->
+<div>
+<h2 class="font-headline-md text-headline-md text-primary mb-stack-md flex items-center gap-2">
+<span class="material-symbols-outlined text-[#dc2626]">cancel</span>
+                        Opposing Evidence
+                    </h2>
+<div class="space-y-stack-md">
+<!-- Paper 1 -->
+<article class="group cursor-pointer">
+<div class="editorial-hairline pb-4 transition-colors group-hover:border-primary">
+<h3 class="font-body-lg text-body-lg font-medium text-primary mb-1 group-hover:text-primary-container transition-colors">Longitudinal Receptor Degradation</h3>
+<div class="flex items-center justify-between font-meta-sm text-meta-sm text-on-surface-variant">
+<span>Psychopharmacology, 2023</span>
+<span class="px-2 py-0.5 bg-[#dc2626]/10 text-[#dc2626] border border-[#dc2626]/20">Confidence: High</span>
+</div>
+</div>
+</article>
+<!-- Paper 2 -->
+<article class="group cursor-pointer">
+<div class="editorial-hairline pb-4 transition-colors group-hover:border-primary">
+<h3 class="font-body-lg text-body-lg font-medium text-primary mb-1 group-hover:text-primary-container transition-colors">Paradoxical Fatigue Syndromes at High Doses</h3>
+<div class="flex items-center justify-between font-meta-sm text-meta-sm text-on-surface-variant">
+<span>Annual Review of Med, 2021</span>
+<span class="px-2 py-0.5 bg-outline/10 text-on-surface-variant border border-outline/20">Confidence: Moderate</span>
+</div>
+</div>
+</article>
+</div>
+</div>
+</section>
+</div>
+</main>
+</body></html>

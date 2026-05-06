@@ -1,0 +1,63 @@
+.actionButton {
+  border: 1px solid transparent;
+  background: var(--color-ink);
+  color: var(--color-paper);
+  font-family: var(--font-sans);
+  font-size: var(--text-label);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: var(--space-3) var(--space-5);
+  cursor: pointer;
+  transition: all var(--motion-fast);
+  position: relative;
+  overflow: hidden;
+}
+
+.actionButton::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(255,255,255,0.1), transparent);
+  opacity: 0;
+  transition: opacity var(--motion-fast);
+}
+
+.actionButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.actionButton:hover::after {
+  opacity: 1;
+}
+
+.actionButton:active {
+  transform: translateY(0);
+}
+
+.actionButton:focus-visible {
+  outline: 2px solid var(--color-ink);
+  outline-offset: 2px;
+}
+
+.ghost {
+  background: transparent;
+  color: var(--color-ink);
+  border-color: var(--color-outline);
+}
+
+.ghost:hover {
+  background: var(--color-panel-low);
+  border-color: var(--color-ink);
+}
+
+.hoverHighlight {
+  transition: all var(--motion-fast);
+}
+
+.hoverHighlight:hover {
+  background: var(--color-panel-low);
+  border-color: var(--color-outline);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-soft);
+}

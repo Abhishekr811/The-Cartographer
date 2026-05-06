@@ -1,0 +1,95 @@
+.overlay {
+  position: fixed;
+  inset: var(--space-3);
+  z-index: 40;
+  border: 0.5px solid var(--color-outline-variant);
+  background: var(--color-paper);
+  display: grid;
+  grid-template-rows: auto 1fr;
+  animation: overlayIn 180ms ease-out;
+}
+
+.overlayHeader {
+  display: flex;
+  justify-content: flex-end;
+  padding: var(--space-4);
+  border-bottom: 0.5px solid var(--color-outline-variant);
+}
+
+.overlayBody {
+  display: grid;
+  grid-template-columns: 1.1fr 1.2fr 1fr;
+  gap: var(--space-6);
+  padding: var(--space-6);
+  overflow: auto;
+}
+
+.contextPanel,
+.evidencePanel {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.graphPanel {
+  border-inline: 0.5px solid var(--color-outline-variant);
+  padding-inline: var(--space-5);
+  display: grid;
+  place-items: center;
+}
+
+.graphPlaceholder {
+  width: min(420px, 100%);
+  aspect-ratio: 1;
+  border: 0.5px dashed var(--color-outline);
+  background: repeating-linear-gradient(
+    45deg,
+    var(--color-panel-low),
+    var(--color-panel-low) 8px,
+    transparent 8px,
+    transparent 16px
+  );
+  display: grid;
+  place-items: center;
+  text-align: center;
+  padding: var(--space-4);
+}
+
+.evidenceList {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.evidenceItem {
+  padding-bottom: var(--space-3);
+  border-bottom: 0.5px solid var(--color-outline-variant);
+}
+
+@keyframes overlayIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 1100px) {
+  .overlay {
+    inset: var(--space-2);
+  }
+
+  .overlayBody {
+    grid-template-columns: 1fr;
+    gap: var(--space-5);
+    padding: var(--space-5);
+  }
+
+  .graphPanel {
+    border-inline: 0;
+    border-block: 0.5px solid var(--color-outline-variant);
+    padding-block: var(--space-4);
+    padding-inline: 0;
+  }
+}

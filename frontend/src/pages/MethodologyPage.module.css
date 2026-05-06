@@ -1,0 +1,59 @@
+.methodStack {
+  display: grid;
+  gap: var(--space-7);
+}
+
+.methodSection {
+  display: grid;
+  grid-template-columns: 5fr 7fr;
+  gap: var(--space-6);
+  align-items: stretch;
+}
+
+.methodSection:nth-child(even) {
+  grid-template-columns: 7fr 5fr;
+}
+
+.methodSection:nth-child(even) .textPane {
+  order: 2;
+}
+
+.methodSection:nth-child(even) .visualPane {
+  order: 1;
+}
+
+.textPane {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.textPaneFull {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  grid-column: 1 / -1;
+  max-width: 800px;
+}
+
+.visualPane {
+  border: 0.5px solid var(--color-outline-variant);
+  background: linear-gradient(135deg, var(--color-panel) 0%, var(--color-panel-low) 100%);
+  min-height: 240px;
+  display: grid;
+  place-items: center;
+  padding: var(--space-4);
+  text-align: center;
+}
+
+@media (max-width: 980px) {
+  .methodSection,
+  .methodSection:nth-child(even) {
+    grid-template-columns: 1fr;
+  }
+
+  .methodSection:nth-child(even) .textPane,
+  .methodSection:nth-child(even) .visualPane {
+    order: initial;
+  }
+}

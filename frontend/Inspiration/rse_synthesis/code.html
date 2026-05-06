@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Research State Engine - Synthesis</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&amp;family=Work+Sans:ital,wght@0,100..900;1,100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-bright": "#fdf8f8",
+                    "secondary-fixed": "#e4e2e2",
+                    "on-background": "#1c1b1b",
+                    "outline": "#747878",
+                    "on-surface-variant": "#444748",
+                    "on-error-container": "#93000a",
+                    "tertiary-fixed-dim": "#cac6c3",
+                    "surface-container": "#f1edec",
+                    "primary-container": "#1c1b1b",
+                    "on-tertiary-fixed-variant": "#484645",
+                    "on-primary": "#ffffff",
+                    "surface-variant": "#e5e2e1",
+                    "primary-fixed-dim": "#c8c6c5",
+                    "on-surface": "#1c1b1b",
+                    "tertiary-fixed": "#e6e1df",
+                    "secondary": "#5e5e5e",
+                    "on-error": "#ffffff",
+                    "on-primary-fixed-variant": "#474646",
+                    "on-tertiary": "#ffffff",
+                    "surface": "#fdf8f8",
+                    "outline-variant": "#c4c7c7",
+                    "on-secondary-container": "#646464",
+                    "on-secondary": "#ffffff",
+                    "error": "#ba1a1a",
+                    "surface-container-low": "#f7f3f2",
+                    "on-secondary-fixed": "#1b1c1c",
+                    "inverse-primary": "#c8c6c5",
+                    "surface-container-high": "#ebe7e6",
+                    "error-container": "#ffdad6",
+                    "tertiary-container": "#1c1b1a",
+                    "primary": "#000000",
+                    "surface-container-highest": "#e5e2e1",
+                    "on-tertiary-fixed": "#1c1b1a",
+                    "inverse-surface": "#313030",
+                    "tertiary": "#000000",
+                    "on-primary-fixed": "#1c1b1b",
+                    "on-primary-container": "#858383",
+                    "primary-fixed": "#e5e2e1",
+                    "background": "#fdf8f8",
+                    "surface-tint": "#5f5e5e",
+                    "secondary-fixed-dim": "#c8c6c6",
+                    "inverse-on-surface": "#f4f0ef",
+                    "surface-dim": "#ddd9d8",
+                    "surface-container-lowest": "#ffffff",
+                    "secondary-container": "#e4e2e2",
+                    "on-tertiary-container": "#868381",
+                    "on-secondary-fixed-variant": "#474747"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "stack-md": "24px",
+                    "stack-lg": "48px",
+                    "unit": "4px",
+                    "gutter": "32px",
+                    "stack-sm": "12px",
+                    "margin-page": "64px"
+            },
+            "fontFamily": {
+                    "body-lg": [
+                            "Work Sans"
+                    ],
+                    "headline-md": [
+                            "Newsreader"
+                    ],
+                    "headline-lg": [
+                            "Newsreader"
+                    ],
+                    "label-caps": [
+                            "Work Sans"
+                    ],
+                    "meta-sm": [
+                            "Work Sans"
+                    ],
+                    "body-md": [
+                            "Work Sans"
+                    ],
+                    "display-xl": [
+                            "Newsreader"
+                    ]
+            },
+            "fontSize": {
+                    "body-lg": [
+                            "18px",
+                            {
+                                    "lineHeight": "1.6",
+                                    "fontWeight": "400"
+                            }
+                    ],
+                    "headline-md": [
+                            "24px",
+                            {
+                                    "lineHeight": "1.3",
+                                    "fontWeight": "500"
+                            }
+                    ],
+                    "headline-lg": [
+                            "32px",
+                            {
+                                    "lineHeight": "1.2",
+                                    "fontWeight": "500"
+                            }
+                    ],
+                    "label-caps": [
+                            "12px",
+                            {
+                                    "lineHeight": "1",
+                                    "letterSpacing": "0.08em",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "meta-sm": [
+                            "13px",
+                            {
+                                    "lineHeight": "1.4",
+                                    "fontWeight": "400"
+                            }
+                    ],
+                    "body-md": [
+                            "16px",
+                            {
+                                    "lineHeight": "1.6",
+                                    "fontWeight": "400"
+                            }
+                    ],
+                    "display-xl": [
+                            "48px",
+                            {
+                                    "lineHeight": "1.1",
+                                    "letterSpacing": "-0.02em",
+                                    "fontWeight": "600"
+                            }
+                    ]
+            }
+        },
+        },
+      }
+    </script>
+<style>
+        body { background-color: #fdf8f8; color: #1c1b1b; }
+        /* Hairline utility for crisp editorial borders */
+        .hairline-b { border-bottom: 0.5px solid #c4c7c7; }
+        .hairline-r { border-right: 0.5px solid #c4c7c7; }
+        .hairline-l { border-left: 0.5px solid #c4c7c7; }
+        .hairline-t { border-top: 0.5px solid #c4c7c7; }
+        .hairline-all { border: 0.5px solid #c4c7c7; }
+        
+        /* Specific line drawing for the graph area */
+        .graph-line {
+            position: absolute;
+            background-color: #c4c7c7;
+            height: 0.5px;
+            z-index: 0;
+        }
+    </style>
+</head>
+<body class="font-body-md text-body-md overflow-hidden flex h-screen">
+<!-- SideNavBar (Shared Component JSON injected) -->
+<nav class="bg-white dark:bg-stone-950 text-[#121212] dark:text-stone-100 font-['Newsreader'] text-sm tracking-wide fixed h-screen left-0 w-64 border-r-[0.5px] border-r-[0.5px] border-stone-200 dark:border-stone-800 z-20">
+<div class="flex flex-col h-full py-8 gap-4">
+<div class="px-6 mb-8">
+<h1 class="font-bold text-lg text-stone-900 dark:text-stone-50">Project Alpha</h1>
+<p class="text-stone-400 dark:text-stone-500 mt-1">State: Deep Focus</p>
+</div>
+<ul class="flex flex-col flex-1">
+<li class="flex items-center gap-3 text-stone-400 dark:text-stone-500 px-6 py-3 hover:bg-stone-50 dark:hover:bg-stone-900/50 transition-all duration-200 ease-in-out cursor-pointer active:opacity-70">
+<span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 0;">menu_book</span>
+<span>Workspace</span>
+</li>
+<!-- Active State: Graph implies Connections area -->
+<li class="flex items-center gap-3 bg-stone-100 dark:bg-stone-900 border-l-4 border-stone-900 dark:border-stone-100 font-medium px-6 py-3 transition-all duration-200 ease-in-out cursor-pointer active:opacity-70">
+<span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 0;">hub</span>
+<span>Graph</span>
+</li>
+<li class="flex items-center gap-3 text-stone-400 dark:text-stone-500 px-6 py-3 hover:bg-stone-50 dark:hover:bg-stone-900/50 transition-all duration-200 ease-in-out cursor-pointer active:opacity-70">
+<span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 0;">inventory_2</span>
+<span>Archive</span>
+</li>
+<li class="flex items-center gap-3 text-stone-400 dark:text-stone-500 px-6 py-3 hover:bg-stone-50 dark:hover:bg-stone-900/50 transition-all duration-200 ease-in-out cursor-pointer active:opacity-70">
+<span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 0;">history_edu</span>
+<span>Citations</span>
+</li>
+</ul>
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<div class="flex-1 ml-64 flex flex-col h-full relative">
+<!-- TopAppBar (Shared Component JSON injected) -->
+<header class="bg-[#F0F0EE] dark:bg-stone-900 text-[#121212] dark:text-stone-100 font-['Newsreader'] italic tracking-tight docked full-width top-0 border-b-[0.5px] border-b-[0.5px] border-stone-300 dark:border-stone-700 z-10">
+<div class="flex justify-between items-center px-8 py-4 w-full">
+<div class="text-2xl font-semibold text-[#121212] dark:text-stone-100 uppercase tracking-widest not-italic">
+                    Research State Engine
+                </div>
+<nav class="flex gap-8 items-center not-italic">
+<a class="text-stone-500 dark:text-stone-400 font-light hover:text-stone-900 dark:hover:text-stone-200 transition-colors duration-150 cursor-pointer active:opacity-70" href="#">Archive</a>
+<!-- Active State: Synthesis -->
+<a class="text-[#121212] dark:text-stone-100 border-b-2 border-stone-900 dark:border-stone-100 hover:text-stone-900 dark:hover:text-stone-200 transition-colors duration-150 cursor-pointer active:opacity-70 py-1" href="#">Synthesis</a>
+<a class="text-stone-500 dark:text-stone-400 font-light hover:text-stone-900 dark:hover:text-stone-200 transition-colors duration-150 cursor-pointer active:opacity-70" href="#">Methodology</a>
+</nav>
+<div class="flex gap-4 items-center not-italic">
+<span class="material-symbols-outlined cursor-pointer active:opacity-70 hover:text-stone-900 dark:hover:text-stone-200 transition-colors duration-150 text-stone-500">grid_view</span>
+<span class="material-symbols-outlined cursor-pointer active:opacity-70 hover:text-stone-900 dark:hover:text-stone-200 transition-colors duration-150 text-stone-500">settings</span>
+<span class="material-symbols-outlined cursor-pointer active:opacity-70 hover:text-stone-900 dark:hover:text-stone-200 transition-colors duration-150 text-stone-500">account_circle</span>
+</div>
+</div>
+</header>
+<!-- Synthesis Workspace Layout -->
+<main class="flex-1 overflow-hidden p-gutter">
+<div class="grid grid-cols-12 gap-gutter h-full">
+<!-- Left Panel: Selected Claims -->
+<section class="col-span-3 flex flex-col h-full hairline-r pr-gutter">
+<header class="mb-stack-md shrink-0">
+<h2 class="font-headline-md text-headline-md text-on-surface">Selected Claims</h2>
+<p class="font-meta-sm text-meta-sm text-on-surface-variant mt-2 uppercase tracking-widest">Active Focus Queue</p>
+</header>
+<div class="overflow-y-auto flex-1 pb-margin-page flex flex-col gap-stack-md pr-2">
+<!-- Claim Block 1 -->
+<article class="border-l-[4px] border-primary pl-4 py-1">
+<div class="flex justify-between items-baseline mb-2">
+<span class="font-label-caps text-label-caps text-on-surface-variant">NODE 01A</span>
+<span class="font-meta-sm text-meta-sm text-on-surface-variant">Archived: 09:42</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface">
+                                The reduction of cognitive load directly correlates with sparse visual hierarchies, suggesting that minimalist environments actively facilitate deeper reading comprehension.
+                            </p>
+<div class="mt-3 font-meta-sm text-meta-sm text-secondary">
+                                Source: <i>Journal of Digital Spatiality, 2023</i>
+</div>
+</article>
+<!-- Claim Block 2 -->
+<article class="border-l-[4px] border-surface-tint pl-4 py-1 opacity-80 hover:opacity-100 transition-opacity">
+<div class="flex justify-between items-baseline mb-2">
+<span class="font-label-caps text-label-caps text-on-surface-variant">NODE 04C</span>
+<span class="font-meta-sm text-meta-sm text-on-surface-variant">Archived: 11:15</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface">
+                                Asymmetric layouts compel a deliberate visual scanning pattern, effectively breaking the automaticity of standard Z-pattern consumption.
+                            </p>
+<div class="mt-3 font-meta-sm text-meta-sm text-secondary">
+                                Citation: <i>Kahnemann et al.</i>
+</div>
+</article>
+<!-- Claim Block 3 -->
+<article class="border-l-[4px] border-surface-tint pl-4 py-1 opacity-80 hover:opacity-100 transition-opacity">
+<div class="flex justify-between items-baseline mb-2">
+<span class="font-label-caps text-label-caps text-on-surface-variant">NODE 12B</span>
+<span class="font-meta-sm text-meta-sm text-on-surface-variant">Archived: Yesterday</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface">
+                                The absence of skeuomorphic depth cues (shadows, bevels) forces the user to rely entirely on typographic hierarchy and structural framing for wayfinding.
+                            </p>
+<div class="mt-3 font-meta-sm text-meta-sm text-secondary">
+                                Observation Note #442
+                            </div>
+</article>
+</div>
+</section>
+<!-- Center Panel: Connections (Graph Canvas) -->
+<section class="col-span-6 flex flex-col h-full bg-surface-container-lowest hairline-all relative overflow-hidden group">
+<div class="absolute top-4 left-4 z-10 pointer-events-none">
+<span class="font-label-caps text-label-caps text-on-surface-variant bg-surface-container-lowest px-2 py-1 hairline-all">CONNECTIONS CANVAS</span>
+</div>
+<!-- Canvas Area -->
+<div class="flex-1 relative w-full h-full cursor-crosshair">
+<!-- Simulated Graph Lines -->
+<div class="graph-line w-[180px] top-[30%] left-[25%] origin-left rotate-12"></div>
+<div class="graph-line w-[220px] top-[45%] left-[45%] origin-left -rotate-[25deg]"></div>
+<div class="graph-line w-[150px] top-[60%] left-[30%] origin-left rotate-[40deg]"></div>
+<!-- Node 1 -->
+<div class="absolute top-[25%] left-[15%] z-10 hairline-all bg-surface-bright px-4 py-3 hover:bg-surface-container-low transition-colors cursor-pointer w-48">
+<div class="font-label-caps text-label-caps text-primary mb-1">C-LOAD REDUCTION</div>
+<p class="font-meta-sm text-meta-sm text-on-surface leading-tight">Minimalist environments facilitate deep comprehension.</p>
+</div>
+<!-- Node 2 (Central) -->
+<div class="absolute top-[42%] left-[40%] z-10 border-[1.5px] border-primary bg-surface-bright px-5 py-4 cursor-pointer w-56 shadow-[0_4px_24px_rgba(0,0,0,0.04)]">
+<div class="font-label-caps text-label-caps text-primary mb-2 flex justify-between items-center">
+<span>SYNTHESIS POINT</span>
+<span class="material-symbols-outlined text-[14px]">link</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface font-medium leading-snug">
+                                Structural sparsity acts as a cognitive anchor, binding attention to content rather than interface.
+                            </p>
+</div>
+<!-- Node 3 -->
+<div class="absolute top-[65%] left-[55%] z-10 hairline-all bg-surface-bright px-4 py-3 hover:bg-surface-container-low transition-colors cursor-pointer w-48">
+<div class="font-label-caps text-label-caps text-secondary mb-1">SCAN PATTERNS</div>
+<p class="font-meta-sm text-meta-sm text-on-surface leading-tight">Asymmetry disrupts passive Z-pattern reading.</p>
+</div>
+<!-- Floating Action inside canvas -->
+<div class="absolute bottom-6 right-6 z-20">
+<button class="bg-primary text-on-primary font-label-caps text-label-caps px-4 py-2 hover:bg-tertiary-container transition-colors flex items-center gap-2 rounded-none">
+<span class="material-symbols-outlined text-[16px]">add</span>
+                                NEW NODE
+                            </button>
+</div>
+</div>
+</section>
+<!-- Right Panel: Emerging Insight -->
+<section class="col-span-3 flex flex-col h-full pl-gutter overflow-y-auto relative">
+<header class="mb-stack-lg shrink-0 pt-2">
+<p class="font-label-caps text-label-caps text-on-surface-variant mb-2">WORKING DRAFT</p>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">The Architecture of Attention</h2>
+</header>
+<div class="flex-1 font-body-lg text-body-lg text-on-surface relative">
+<p class="mb-stack-md indent-8">
+                            Through the synthesis of spatial dynamics and cognitive load theory, a clear pattern emerges regarding interface design for deep work. The data suggests that aggressive reduction of visual noise—specifically the elimination of skeuomorphic depth cues and structural containers—forces a necessary friction in consumption.
+                        </p>
+<!-- Marginalia Note linked to paragraph -->
+<div class="relative mb-stack-md">
+<p class="indent-8">
+                                Asymmetric layouts, far from creating confusion, act as structural punctuation. They compel the reader to slow down, breaking the hypnotic momentum of infinite scroll patterns. This structural sparsity does not merely frame content; it actively dictates the pace at which that content is integrated into the user's working memory.
+                            </p>
+<!-- Marginalia positioning via absolute offset -->
+<aside class="absolute top-2 -right-4 w-32 translate-x-full pl-4 hairline-l hidden xl:block">
+<span class="font-label-caps text-label-caps text-primary block mb-1">REF: Kahnemann</span>
+<p class="font-meta-sm text-meta-sm text-on-surface-variant leading-tight">
+                                    Compare this deliberate friction to 'System 2' thinking activation.
+                                </p>
+</aside>
+</div>
+<p class="mb-stack-md indent-8">
+                            Consequently, the 'Editorial Minimalism' approach is not an aesthetic choice but a functional imperative for knowledge environments. By rendering the interface invisible, the architecture of the information itself becomes the sole navigational anchor.
+                        </p>
+<div class="mt-stack-lg hairline-t pt-4">
+<button class="font-label-caps text-label-caps text-primary border-b-[1px] border-primary pb-1 hover:border-b-[2px] transition-all">
+                                PUBLISH INSIGHT TO GRAPH
+                            </button>
+</div>
+</div>
+</section>
+</div>
+</main>
+</div>
+</body></html>

@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Archive - Research State Engine</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&amp;family=Work+Sans:ital,wght@0,100..900;1,100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Theme Configuration -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-bright": "#fdf8f8",
+                    "secondary-fixed": "#e4e2e2",
+                    "on-background": "#1c1b1b",
+                    "outline": "#747878",
+                    "on-surface-variant": "#444748",
+                    "on-error-container": "#93000a",
+                    "tertiary-fixed-dim": "#cac6c3",
+                    "surface-container": "#f1edec",
+                    "primary-container": "#1c1b1b",
+                    "on-tertiary-fixed-variant": "#484645",
+                    "on-primary": "#ffffff",
+                    "surface-variant": "#e5e2e1",
+                    "primary-fixed-dim": "#c8c6c5",
+                    "on-surface": "#1c1b1b",
+                    "tertiary-fixed": "#e6e1df",
+                    "secondary": "#5e5e5e",
+                    "on-error": "#ffffff",
+                    "on-primary-fixed-variant": "#474646",
+                    "on-tertiary": "#ffffff",
+                    "surface": "#fdf8f8",
+                    "outline-variant": "#c4c7c7",
+                    "on-secondary-container": "#646464",
+                    "on-secondary": "#ffffff",
+                    "error": "#ba1a1a",
+                    "surface-container-low": "#f7f3f2",
+                    "on-secondary-fixed": "#1b1c1c",
+                    "inverse-primary": "#c8c6c5",
+                    "surface-container-high": "#ebe7e6",
+                    "error-container": "#ffdad6",
+                    "tertiary-container": "#1c1b1a",
+                    "primary": "#000000",
+                    "surface-container-highest": "#e5e2e1",
+                    "on-tertiary-fixed": "#1c1b1a",
+                    "inverse-surface": "#313030",
+                    "tertiary": "#000000",
+                    "on-primary-fixed": "#1c1b1b",
+                    "on-primary-container": "#858383",
+                    "primary-fixed": "#e5e2e1",
+                    "background": "#fdf8f8",
+                    "surface-tint": "#5f5e5e",
+                    "secondary-fixed-dim": "#c8c6c6",
+                    "inverse-on-surface": "#f4f0ef",
+                    "surface-dim": "#ddd9d8",
+                    "surface-container-lowest": "#ffffff",
+                    "secondary-container": "#e4e2e2",
+                    "on-tertiary-container": "#868381",
+                    "on-secondary-fixed-variant": "#474747"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "stack-md": "24px",
+                    "stack-lg": "48px",
+                    "unit": "4px",
+                    "gutter": "32px",
+                    "stack-sm": "12px",
+                    "margin-page": "64px"
+            },
+            "fontFamily": {
+                    "body-lg": [
+                            "Work Sans"
+                    ],
+                    "headline-md": [
+                            "Newsreader"
+                    ],
+                    "headline-lg": [
+                            "Newsreader"
+                    ],
+                    "label-caps": [
+                            "Work Sans"
+                    ],
+                    "meta-sm": [
+                            "Work Sans"
+                    ],
+                    "body-md": [
+                            "Work Sans"
+                    ],
+                    "display-xl": [
+                            "Newsreader"
+                    ]
+            },
+            "fontSize": {
+                    "body-lg": [
+                            "18px",
+                            {
+                                    "lineHeight": "1.6",
+                                    "fontWeight": "400"
+                            }
+                    ],
+                    "headline-md": [
+                            "24px",
+                            {
+                                    "lineHeight": "1.3",
+                                    "fontWeight": "500"
+                            }
+                    ],
+                    "headline-lg": [
+                            "32px",
+                            {
+                                    "lineHeight": "1.2",
+                                    "fontWeight": "500"
+                            }
+                    ],
+                    "label-caps": [
+                            "12px",
+                            {
+                                    "lineHeight": "1",
+                                    "letterSpacing": "0.08em",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "meta-sm": [
+                            "13px",
+                            {
+                                    "lineHeight": "1.4",
+                                    "fontWeight": "400"
+                            }
+                    ],
+                    "body-md": [
+                            "16px",
+                            {
+                                    "lineHeight": "1.6",
+                                    "fontWeight": "400"
+                            }
+                    ],
+                    "display-xl": [
+                            "48px",
+                            {
+                                    "lineHeight": "1.1",
+                                    "letterSpacing": "-0.02em",
+                                    "fontWeight": "600"
+                            }
+                    ]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        /* Subtle background grid representing the "state engine" framework */
+        body {
+            background-image: linear-gradient(to right, #e5e2e1 1px, transparent 1px),
+                              linear-gradient(to bottom, #e5e2e1 1px, transparent 1px);
+            background-size: 64px 64px;
+            background-position: top left;
+        }
+        
+        /* Typography overrides to enforce the Style Guidance weights where not explicitly set by config */
+        .editorial-border {
+            border-style: solid;
+            border-width: 0 0 0.5px 0;
+            border-color: #1c1b1b;
+        }
+    </style>
+</head>
+<body class="bg-surface-bright text-on-background font-body-md antialiased min-h-screen flex">
+<!-- SideNavBar Component -->
+<aside class="fixed h-screen left-0 w-64 border-r-[0.5px] border-r-[0.5px] border-stone-200 dark:border-stone-800 bg-white dark:bg-stone-950 flex flex-col h-full py-8 gap-4 z-40">
+<div class="px-6 mb-stack-md">
+<h2 class="font-bold text-lg text-stone-900 dark:text-stone-50 mb-1">Project Alpha</h2>
+<p class="font-['Newsreader'] text-sm tracking-wide text-stone-500">State: Deep Focus</p>
+</div>
+<nav class="flex flex-col w-full gap-1">
+<!-- Inactive Tab -->
+<a class="flex items-center gap-3 text-stone-400 dark:text-stone-500 px-6 py-3 hover:bg-stone-50 dark:hover:bg-stone-900/50 transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">menu_book</span>
+<span class="font-['Newsreader'] text-sm tracking-wide text-[#121212] dark:text-stone-100">Workspace</span>
+</a>
+<!-- Inactive Tab -->
+<a class="flex items-center gap-3 text-stone-400 dark:text-stone-500 px-6 py-3 hover:bg-stone-50 dark:hover:bg-stone-900/50 transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">hub</span>
+<span class="font-['Newsreader'] text-sm tracking-wide text-[#121212] dark:text-stone-100">Graph</span>
+</a>
+<!-- Active Tab -->
+<a class="flex items-center gap-3 bg-stone-100 dark:bg-stone-900 border-l-4 border-stone-900 dark:border-stone-100 font-medium px-6 py-3 transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">inventory_2</span>
+<span class="font-['Newsreader'] text-sm tracking-wide text-[#121212] dark:text-stone-100">Archive</span>
+</a>
+<!-- Inactive Tab -->
+<a class="flex items-center gap-3 text-stone-400 dark:text-stone-500 px-6 py-3 hover:bg-stone-50 dark:hover:bg-stone-900/50 transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">history_edu</span>
+<span class="font-['Newsreader'] text-sm tracking-wide text-[#121212] dark:text-stone-100">Citations</span>
+</a>
+</nav>
+</aside>
+<!-- Main Content Area Container -->
+<div class="ml-64 flex flex-col flex-grow min-h-screen relative">
+<!-- TopAppBar Component -->
+<header class="sticky top-0 z-30 docked full-width top-0 border-b-[0.5px] border-b-[0.5px] border-stone-300 dark:border-stone-700 bg-[#F0F0EE] dark:bg-stone-900 flex justify-between items-center px-8 py-4 w-full">
+<div class="flex items-center gap-gutter">
+<h1 class="text-2xl font-semibold text-[#121212] dark:text-stone-100 uppercase tracking-widest">Research State Engine</h1>
+<nav class="hidden md:flex gap-6 items-center border-l-[0.5px] border-stone-300 pl-6 h-full">
+<!-- Active Link -->
+<a class="text-[#121212] dark:text-stone-100 border-b-2 border-stone-900 dark:border-stone-100 font-['Newsreader'] italic tracking-tight py-1 cursor-pointer active:opacity-70" href="#">Archive</a>
+<!-- Inactive Link -->
+<a class="text-stone-500 dark:text-stone-400 font-light hover:text-stone-900 dark:hover:text-stone-200 transition-colors duration-150 font-['Newsreader'] italic tracking-tight py-1 cursor-pointer active:opacity-70" href="#">Synthesis</a>
+<!-- Inactive Link -->
+<a class="text-stone-500 dark:text-stone-400 font-light hover:text-stone-900 dark:hover:text-stone-200 transition-colors duration-150 font-['Newsreader'] italic tracking-tight py-1 cursor-pointer active:opacity-70" href="#">Methodology</a>
+</nav>
+</div>
+<div class="flex items-center gap-4 text-[#121212] dark:text-stone-100">
+<button class="hover:text-stone-900 dark:hover:text-stone-200 transition-colors duration-150 cursor-pointer active:opacity-70 flex items-center justify-center">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">grid_view</span>
+</button>
+<button class="hover:text-stone-900 dark:hover:text-stone-200 transition-colors duration-150 cursor-pointer active:opacity-70 flex items-center justify-center">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">settings</span>
+</button>
+<button class="hover:text-stone-900 dark:hover:text-stone-200 transition-colors duration-150 cursor-pointer active:opacity-70 flex items-center justify-center">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">account_circle</span>
+</button>
+</div>
+</header>
+<!-- Main Canvas -->
+<main class="flex-grow w-full max-w-[1400px] mx-auto px-margin-page py-margin-page bg-surface-bright/95 backdrop-blur-sm">
+<!-- Page Header -->
+<div class="mb-stack-lg pb-stack-md border-b-[0.5px] border-outline-variant">
+<h1 class="font-display-xl text-display-xl text-on-background mb-unit tracking-tight">Archive</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">Previously explored research states</p>
+</div>
+<!-- Archive List Container (Editorial Grid Layout) -->
+<div class="flex flex-col">
+<!-- List Item 1 -->
+<article class="grid grid-cols-12 gap-gutter py-stack-md border-b-[0.5px] border-outline-variant hover:bg-surface-container-low transition-colors duration-300 items-start group">
+<!-- Marginalia / Timestamp -->
+<div class="col-span-2 flex flex-col pt-2 relative">
+<span class="font-meta-sm text-meta-sm text-on-surface-variant uppercase tracking-widest">Oct 24, 2023</span>
+<span class="font-meta-sm text-meta-sm text-outline mt-1">14:32 UTC</span>
+<!-- Editorial connector line visible on hover -->
+<div class="absolute right-0 top-6 w-8 h-[0.5px] bg-primary opacity-0 group-hover:opacity-100 transition-opacity"></div>
+</div>
+<!-- Core Content -->
+<div class="col-span-7 pr-gutter">
+<h3 class="font-headline-lg text-headline-lg text-on-background mb-stack-sm leading-tight group-hover:text-primary transition-colors">Epistemological Certainty in LLM-Assisted Peer Review</h3>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+                            Investigation into the cascading effects of automated synthesis on academic consensus building. The primary node explored the degradation of minority dissenting opinions when evaluated by norm-seeking language models.
+                        </p>
+</div>
+<!-- State Indicators (Right Column) -->
+<div class="col-span-3 flex flex-col gap-3 pl-gutter border-l-[0.5px] border-outline-variant pt-2">
+<!-- Custom Indicator blocks per Style Guidance -->
+<div class="border-l-[4px] border-on-background pl-3 py-1">
+<span class="font-label-caps text-label-caps text-on-background block mb-1">Consensus Reached</span>
+<span class="font-meta-sm text-meta-sm text-on-surface-variant">Methodological framework established.</span>
+</div>
+<div class="border-l-[4px] border-error pl-3 py-1">
+<span class="font-label-caps text-label-caps text-error block mb-1">Active Conflict</span>
+<span class="font-meta-sm text-meta-sm text-on-surface-variant">Defining 'novelty' in synthesized text.</span>
+</div>
+</div>
+</article>
+<!-- List Item 2 -->
+<article class="grid grid-cols-12 gap-gutter py-stack-md border-b-[0.5px] border-outline-variant hover:bg-surface-container-low transition-colors duration-300 items-start group">
+<div class="col-span-2 flex flex-col pt-2 relative">
+<span class="font-meta-sm text-meta-sm text-on-surface-variant uppercase tracking-widest">Oct 12, 2023</span>
+<span class="font-meta-sm text-meta-sm text-outline mt-1">09:15 UTC</span>
+<div class="absolute right-0 top-6 w-8 h-[0.5px] bg-primary opacity-0 group-hover:opacity-100 transition-opacity"></div>
+</div>
+<div class="col-span-7 pr-gutter">
+<h3 class="font-headline-lg text-headline-lg text-on-background mb-stack-sm leading-tight group-hover:text-primary transition-colors">Network Topology of Asynchronous Byzantine Fault Tolerance</h3>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+                            Mapping the limits of eventual consistency in high-latency, partially connected networks. Focus on deterministic threshold signatures versus probabilistic gossiping protocols.
+                        </p>
+</div>
+<div class="col-span-3 flex flex-col gap-3 pl-gutter border-l-[0.5px] border-outline-variant pt-2">
+<div class="border-l-[4px] border-outline pl-3 py-1">
+<span class="font-label-caps text-label-caps text-outline block mb-1">Identified Gap</span>
+<span class="font-meta-sm text-meta-sm text-on-surface-variant">Lack of empirical data on sub-sea cable latency spikes.</span>
+</div>
+</div>
+</article>
+<!-- List Item 3 -->
+<article class="grid grid-cols-12 gap-gutter py-stack-md border-b-[0.5px] border-outline-variant hover:bg-surface-container-low transition-colors duration-300 items-start group">
+<div class="col-span-2 flex flex-col pt-2 relative">
+<span class="font-meta-sm text-meta-sm text-on-surface-variant uppercase tracking-widest">Sep 28, 2023</span>
+<span class="font-meta-sm text-meta-sm text-outline mt-1">18:40 UTC</span>
+<div class="absolute right-0 top-6 w-8 h-[0.5px] bg-primary opacity-0 group-hover:opacity-100 transition-opacity"></div>
+</div>
+<div class="col-span-7 pr-gutter">
+<h3 class="font-headline-lg text-headline-lg text-on-background mb-stack-sm leading-tight group-hover:text-primary transition-colors">Roman Concrete Longevity vs. Modern Portland Cement</h3>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+                            Chemical analysis of pozzolanic reactions over millennia. Comparing the self-healing properties of ancient marine concrete structures with modern rebar-reinforced degradation patterns.
+                        </p>
+</div>
+<div class="col-span-3 flex flex-col gap-3 pl-gutter border-l-[0.5px] border-outline-variant pt-2">
+<div class="border-l-[4px] border-on-background pl-3 py-1">
+<span class="font-label-caps text-label-caps text-on-background block mb-1">Consensus Reached</span>
+<span class="font-meta-sm text-meta-sm text-on-surface-variant">Aluminous tobermorite formation confirmed.</span>
+</div>
+<div class="border-l-[4px] border-on-background pl-3 py-1">
+<span class="font-label-caps text-label-caps text-on-background block mb-1">Archived State</span>
+<span class="font-meta-sm text-meta-sm text-on-surface-variant">Research node closed. Terminal conclusion reached.</span>
+</div>
+</div>
+</article>
+<!-- Pagination / Load More (Minimalist approach) -->
+<div class="mt-stack-lg flex justify-center pb-margin-page">
+<button class="font-label-caps text-label-caps text-on-background uppercase tracking-widest border-b-[1px] border-on-background pb-1 hover:border-b-[2px] transition-all cursor-pointer">
+                        Load Historical Archives
+                    </button>
+</div>
+</div>
+</main>
+</div>
+</body></html>

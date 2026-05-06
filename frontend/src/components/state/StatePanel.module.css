@@ -1,0 +1,15 @@
+.statePanel {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: var(--space-6);
+}
+
+.statePanelItem {
+  grid-column: span 4;
+}
+
+@media (max-width: 900px) {
+  .statePanelItem {
+    grid-column: span 12;
+  }
+}
