@@ -1,4 +1,4 @@
-# RSE — Knowledge Engine
+# THE CARTOGRAPHER — Knowledge Engine
 
 > **Research State Engine:** Transforms research queries into structured intelligence.
 
